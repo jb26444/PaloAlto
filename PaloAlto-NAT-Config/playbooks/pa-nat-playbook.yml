@@ -8,12 +8,16 @@
   collections:
     - paloaltonetworks.panos
 
-
+  vars:
+    palo_provider:
+      ip_address: '10.10.10.1'
+      username: 'admin'
+      password: 'Terezka30'
 
   tasks:
     - name: Create Server Object
       panos_address_object:
-        provider: '{{ PALO }}'
-        name: 'server1'
-        value: '172.16.1.10'
+        provider: '{{ palo_provider }}'
+        name: 'server1'               
+        value: '172.16.1.10'                
         description: 'vmware'
