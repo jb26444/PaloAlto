@@ -12,7 +12,7 @@
     palo_provider:
       ip_address: '10.10.10.1'
       username: 'admin'
-      password: 'Terezka30'
+      password: 'tttttt'
 
   tasks:
     - name: Create Server Object
