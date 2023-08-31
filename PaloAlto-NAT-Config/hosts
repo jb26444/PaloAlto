@@ -1,0 +1,7 @@
+
+[palo]
+PALO-1 ansible_host=10.10.10.1
+
+[palo:vars]
+ansible_user=super_admin
+ansible_password=cisco123
