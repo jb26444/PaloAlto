@@ -1,0 +1,23 @@
+---
+
+- name: Palo Alto Playbook
+  hosts: palo
+  gather_facts: false
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    palo_provider:
+      ip_address: "{{ ansible_host }}"
+      username: 'super_admin'
+      password: 'cisco123'
+
+  tasks:
+    - name: Create Server Object
+      panos_address_object:
+        provider: '{{ palo_provider }}'
+        name: 'server4'               
+        value: '172.16.1.14'                
+        description: 'vmware'
