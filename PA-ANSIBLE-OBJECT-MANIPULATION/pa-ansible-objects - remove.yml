@@ -1,0 +1,21 @@
+---
+
+- name: Palo Alto Playbook
+  hosts: palo
+  gather_facts: false
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    provider:
+      ip_address: "{{ ansible_host }}"
+      username: 'super_admin'
+      password: 'Palo123!'
+
+    - name: Delete object 'FQDN'
+      panos_address_object:
+        provider: '{{ provider }}'
+        name: 'AZURE_COM'
+        state: 'delete'

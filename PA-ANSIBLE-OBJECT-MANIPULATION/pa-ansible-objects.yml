@@ -1,0 +1,50 @@
+---
+
+- name: Palo Alto Playbook
+  hosts: palo
+  gather_facts: false
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    provider:
+      ip_address: "{{ ansible_host }}"
+      username: 'super_admin'
+      password: 'Palo123!'
+
+  tasks:    
+    - name: Create object 'HOST'
+      panos_address_object:
+        provider: '{{ provider }}'
+        name: 'SERVER_1'
+        value: '10.10.10.100'
+        description: 'Production-Server-1'
+
+
+    - name: Create object 'RANGE'
+      panos_address_object:
+        provider: '{{ provider }}'
+        name: 'SERVER-FARM'
+        address_type: 'ip-range'
+        value: '10.10.10.150-160'
+        description: 'ALL-DEV-SERVER'
+
+
+    - name: Create object 'SUBNET'
+      panos_address_object:
+        provider: '{{ provider }}'
+        name: 'AZURE'
+        value: '52.96.0.0/14'
+        description: 'AZURE-PUBLIC_SUBNET'
+        
+
+    - name: Create object 'FQDN'
+      panos_address_object:
+        provider: '{{ provider }}'
+        name: 'AZURE_COM'
+        address_type: 'fqdn'
+        value: 'azure.com'
+        description: 'AZURE-PUBLIC-IP'
+
