@@ -21,6 +21,7 @@
         name: 'SERVER_1'
         value: '10.10.10.100'
         description: 'Production-Server-1'
+        
 
 
     - name: Create object 'RANGE'
@@ -30,6 +31,7 @@
         address_type: 'ip-range'
         value: '10.10.10.150-10.10.10.160'
         description: 'ALL-DEV-SERVER'
+        
 
 
     - name: Create object 'SUBNET'
@@ -39,6 +41,7 @@
         value: '52.96.0.0/14'
         description: 'AZURE-PUBLIC_SUBNET'
         
+        
 
     - name: Create object 'FQDN'
       panos_address_object:
@@ -47,4 +50,10 @@
         address_type: 'fqdn'
         value: 'azure.com'
         description: 'AZURE-PUBLIC-IP'
+        
+
+
+    - name: Commit Configuration
+      panos_commit_firewall:
+        provider: '{{ provider }}'
 
