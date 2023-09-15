@@ -1,0 +1,30 @@
+---
+
+- name: Palo Alto Playbook
+  hosts: palo
+  gather_facts: false
+  connection: local
+
+  #collections:
+  # - paloaltonetworks.panos
+
+- name: Include credentials from second file
+  ansible.builtin.include_vars:
+    file: pa-ansible-vault.yml
+
+  vars:
+    provider:
+      ip_address: "{{ ansible_host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+
+  tasks:
+  
+     - name: Create object 'HOST'
+       panos_address_object:
+        provider: '{{ provider }}'
+        name: 'SERVER_1'
+        value: '10.10.10.100'
+        description: 'Production-Server-1'
+ 
+    

@@ -1,0 +1,6 @@
+
+[palo]
+PALO-1 ansible_host=10.10.10.1
+PALO-2 ansible_host=10.10.10.35
+
+
