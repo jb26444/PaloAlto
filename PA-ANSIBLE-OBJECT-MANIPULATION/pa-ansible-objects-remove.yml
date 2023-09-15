@@ -21,4 +21,5 @@
         provider: '{{ provider }}'
         name: 'AZURE_COM'
         state: 'absent'
-        commit: 'true'
+ 
+    
