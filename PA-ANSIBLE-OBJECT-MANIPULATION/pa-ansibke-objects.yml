@@ -9,7 +9,7 @@
     - paloaltonetworks.panos
 
   vars:
-    palo_provider:
+    provider:
       ip_address: "{{ ansible_host }}"
       username: 'super_admin'
       password: 'Palo123!'
@@ -21,7 +21,7 @@
         name: 'Test-One'
         value: '1.1.1.1'
         description: 'Description One'
-        tag: ['Prod']
+        
 
     - name: Create object 'Test-Two'
       panos_address_object:
@@ -30,7 +30,7 @@
         address_type: 'ip-range'
         value: '1.1.1.1-2.2.2.2'
         description: 'Description Two'
-        tag: ['SI']
+        
 
     - name: Create object 'Test-Three'
       panos_address_object:
