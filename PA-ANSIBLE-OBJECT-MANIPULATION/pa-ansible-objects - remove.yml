@@ -14,6 +14,8 @@
       username: 'super_admin'
       password: 'Palo123!'
 
+  tasks:
+  
     - name: Delete object 'FQDN'
       panos_address_object:
         provider: '{{ provider }}'

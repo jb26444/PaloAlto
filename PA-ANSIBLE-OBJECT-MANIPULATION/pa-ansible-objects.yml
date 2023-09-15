@@ -28,7 +28,7 @@
         provider: '{{ provider }}'
         name: 'SERVER-FARM'
         address_type: 'ip-range'
-        value: '10.10.10.150-160'
+        value: '10.10.10.150-10.10.10.160'
         description: 'ALL-DEV-SERVER'
 
 
