@@ -15,11 +15,33 @@
       password: 'Palo123!'
 
   tasks:    
-    - name: generate self signed certificate
-      panos_cert_gen_ssh:
-        ip_address: "10.10.10.1"
-        username: "admin"
-        password: "paloalto"
-        cert_cn: "10.10.10.1"
-        cert_friendly_name: "SELF-SIGN-PA"
-        signed_by: "root-ca"
+    - name: Create object 'Test-One'
+      panos_address_object:
+        provider: '{{ provider }}'
+        name: 'Test-One'
+        value: '1.1.1.1'
+        description: 'Description One'
+        tag: ['Prod']
+
+    - name: Create object 'Test-Two'
+      panos_address_object:
+        provider: '{{ provider }}'
+        name: 'Test-Two'
+        address_type: 'ip-range'
+        value: '1.1.1.1-2.2.2.2'
+        description: 'Description Two'
+        tag: ['SI']
+
+    - name: Create object 'Test-Three'
+      panos_address_object:
+        provider: '{{ provider }}'
+        name: 'Test-Three'
+        address_type: 'fqdn'
+        value: 'foo.bar.baz'
+        description: 'Description Three'
+
+    - name: Delete object 'Test-Two'
+      panos_address_object:
+        provider: '{{ provider }}'
+        name: 'Test-Two'
+        state: 'absent'
