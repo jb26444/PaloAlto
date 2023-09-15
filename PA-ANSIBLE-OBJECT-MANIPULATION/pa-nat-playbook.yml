@@ -1,0 +1,25 @@
+---
+
+- name: Palo Alto Playbook
+  hosts: palo
+  gather_facts: false
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    palo_provider:
+      ip_address: "{{ ansible_host }}"
+      username: 'super_admin'
+      password: 'Palo123!'
+
+  tasks:    
+    - name: generate self signed certificate
+      panos_cert_gen_ssh:
+        ip_address: "10.10.10.1"
+        username: "admin"
+        password: "paloalto"
+        cert_cn: "10.10.10.1"
+        cert_friendly_name: "SELF-SIGN-PA"
+        signed_by: "root-ca"
