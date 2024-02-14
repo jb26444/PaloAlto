@@ -11,15 +11,14 @@
   vars:
     palo_provider:
       ip_address: "{{ ansible_host }}"
-      username: 'super_admin'
-      password: 'Palo123!'
+      username: 'admin'
+      password: 'Terezka30'
 
-  tasks:    
-    - name: generate self signed certificate
-      panos_cert_gen_ssh:
-        ip_address: "10.10.10.1"
-        username: "admin"
-        password: "paloalto"
-        cert_cn: "10.10.10.1"
-        cert_friendly_name: "SELF-SIGN-PA"
-        signed_by: "root-ca"
+  tasks:
+
+    - name: Create object 'HOST'
+      panos_address_object:
+        provider: '{{ ansible_host }}'
+        name: 'SERVER_1'
+        value: '10.10.10.100'
+        description: 'Production-Server-1'
