@@ -1,0 +1,37 @@
+- name: Palo Alto Policy Playbook
+  hosts: palo
+  gather_facts: false
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    palo_provider:
+      ip_address: "{{ ansible_host }}"
+      username: 'admin'
+      password: 'Terezka30'
+
+  tasks:    
+    - name: Create object 'HOST'
+      panos_address_object:
+        provider: '{{ palo_provider }}'
+        name: 'SERVER_1'
+        value: '10.10.10.100'
+        description: 'Production-Server-1'
+
+    - name: Add policy rule at 4th position
+      paloaltonetworks.panos.panos_security_rule:
+        provider: "{{ palo_provider }}"
+        rule_name: 'SERVER_1_DNS'
+        description: 'Allow traffic from trust to untrust'
+        rule_type: 'universal'
+        source_zone: 'LAN'
+        destination_zone: 'WAN'
+        source_ip: 'SERVER_1'
+        destination_ip: 'DNS'
+        action: 'deny'
+        log_start: 'no'
+        log_end: 'yes'
+        location: 'after'
+        existing_rule: 'TEST'
