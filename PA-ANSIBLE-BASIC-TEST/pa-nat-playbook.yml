@@ -1,0 +1,23 @@
+---
+
+- name: Palo Alto Playbook
+  hosts: palo
+  gather_facts: false
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    palo_provider:
+      ip_address: "{{ ansible_host }}"
+      username: 'admin'
+      password: 'Terezka30'
+
+  tasks:
+    - name: Create object 'Test-One'
+      paloaltonetworks.panos.panos_address_object:
+        provider: "{{ palo_provider }}"
+        name: 'Test-One'
+        value: '1.1.1.1'
+        description: 'Description One'
