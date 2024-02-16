@@ -37,7 +37,7 @@
         source_zone: 'LAN'
         destination_zone: 'WAN'
         source_ip: 'SERVER_1'
-        application: 'ssl'
+        application: 'icmp'
         action: 'allow'
         log_start: 'no'
         log_end: 'yes'

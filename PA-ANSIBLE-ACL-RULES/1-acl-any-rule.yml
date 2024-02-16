@@ -22,5 +22,6 @@
         source_zone: 'LAN'
         destination_zone: 'WAN'
         action: 'allow'
+        application: 'web-browsing,ssl'
         log_start: 'no'
         log_end: 'yes'
