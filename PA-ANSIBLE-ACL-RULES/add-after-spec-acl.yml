@@ -27,6 +27,5 @@
         #log_setting: 'default'
         log_start: 'no'
         log_end: 'yes'
-        description: 'Allow traffic from trust to untrust'
         location: 'after'
         existing_rule: 'TEST'
