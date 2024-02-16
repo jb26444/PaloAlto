@@ -1,0 +1,20 @@
+- name: Palo Alto Policy Playbook
+  hosts: palo
+  gather_facts: false
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    palo_provider:
+      ip_address: "{{ ansible_host }}"
+      username: 'admin_rw'
+      password: 'pass_admin_rw'
+
+  tasks:
+    - name: Add policy rule at 4th position
+      paloaltonetworks.panos.panos_security_rule:
+        provider: "{{ palo_provider }}"
+        rule_name: 'ANY_RULE'
+        state: 'absent'
