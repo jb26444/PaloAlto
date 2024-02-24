@@ -1,0 +1,4 @@
+﻿name;source_zone;destination_zone;source;destination;application;action;log_start;log_end
+Rule1;LAN;WAN;any;any;web-browsing;allow;no;yes
+Rule2;LAN;WAN;any;any;any;deny;yes;yes
+Rule3;LAN;LAN;any;any;ssh;allow;yes;yes
