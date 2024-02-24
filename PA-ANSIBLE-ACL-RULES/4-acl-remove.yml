@@ -13,7 +13,7 @@
       password: 'pass_admin_rw'
 
   tasks:
-    - name: Add policy rule at 4th position
+    - name: Remove Any rule
       paloaltonetworks.panos.panos_security_rule:
         provider: "{{ palo_provider }}"
         rule_name: 'ANY_RULE'
