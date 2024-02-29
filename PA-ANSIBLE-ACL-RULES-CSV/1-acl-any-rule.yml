@@ -1,0 +1,27 @@
+- name: Palo Alto Policy Playbook
+  hosts: palo
+  gather_facts: false
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    palo_provider:
+      ip_address: "{{ ansible_host }}"
+      username: 'admin_rw'
+      password: 'pass_admin_rw'
+
+  tasks:
+    - name: Add policy rule
+      paloaltonetworks.panos.panos_security_rule:
+        provider: "{{ palo_provider }}"
+        rule_name: 'ANY_RULE'
+        description: 'Allow traffic from trust to untrust'
+        rule_type: 'universal'
+        source_zone: 'LAN'
+        destination_zone: 'WAN'
+        action: 'allow'
+        application: 'web-browsing,ssl'
+        log_start: 'no'
+        log_end: 'yes'

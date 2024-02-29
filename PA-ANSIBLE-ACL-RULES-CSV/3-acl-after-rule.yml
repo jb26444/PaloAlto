@@ -1,0 +1,48 @@
+- name: Palo Alto Policy Playbook
+  hosts: palo
+  gather_facts: false
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    palo_provider:
+      ip_address: "{{ ansible_host }}"
+      username: 'admin_rw'
+      password: 'pass_admin_rw'
+
+  tasks:
+    - name: Add Deny policy rule at top position
+      paloaltonetworks.panos.panos_security_rule:
+        provider: "{{ palo_provider }}"
+        rule_name: 'BGP'
+        description: 'Allow traffic from trust to untrust'
+        rule_type: 'universal'
+        source_zone: 'LAN'
+        destination_zone: 'WAN'
+        application: 'bgp'
+        action: 'deny'
+        log_start: 'no'
+        log_end: 'yes'
+        location: 'top'
+  
+
+    - name: Add Deny policy rule after ANY RULE
+      paloaltonetworks.panos.panos_security_rule:
+        provider: "{{ palo_provider }}"
+        rule_name: 'SERVER_HTTPS'
+        description: 'Allow traffic from trust to untrust'
+        rule_type: 'universal'
+        source_zone: 'LAN'
+        destination_zone: 'WAN'
+        source_ip: 'SERVER_1'
+        application: 'icmp'
+        action: 'allow'
+        log_start: 'no'
+        log_end: 'yes'
+        location: 'after'
+        existing_rule: 'BGP'
+
+
+
