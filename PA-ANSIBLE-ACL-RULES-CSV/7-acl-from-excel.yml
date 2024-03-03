@@ -15,24 +15,14 @@
 
   tasks:
 
-    - name: Debug CSV File
-      command: cat "/Users/janblahuta/Documents/GitHub/PA-Automation/PaloAlto/PA-ANSIBLE-ACL-RULES-CSV/ansible.csv"
-      register: csv_debug_output
+    - name: Read firewall rules from CSV
+      community.general.read_csv:
+        path: "/Users/janblahuta/Documents/GitHub/PA-Automation/PaloAlto/PA-ANSIBLE-ACL-RULES-CSV/ansible.csv"
+        key: name
+      register: firewall_rules
 
-    - debug:
-        var: csv_debug_output.stdout
-
-    - name: Load firewall rule variables from CSV
-      set_fact:
-        firewall_rules: "{{ lookup('csvfile', csv_file_path, delimiter=';') }}"
-
-    - debug:
-        var: firewall_rules
-
-    - name: Create firewall rules (only if parsed successfully)
+    - name: Add security rule to Palo Alto firewall
       paloaltonetworks.panos.panos_security_rule:
-        provider: "{{ palo_provider }}"
-        name: "{{ item.name }}"
         source_zone: "{{ item.source_zone }}"
         destination_zone: "{{ item.destination_zone }}"
         source: "{{ item.source }}"
@@ -41,4 +31,10 @@
         action: "{{ item.action }}"
         log_start: "{{ item.log_start }}"
         log_end: "{{ item.log_end }}"
-      loop: "{{ firewall_rules }}"
+      loop: "{{ firewall_rules.results }}"
+      register: rule_results
+
+    - name: Print rule creation results
+      debug:
+        msg: "Rule {{ item.name }} creation: {{ item.changed }}"
+      loop: "{{ rule_results.results }}"

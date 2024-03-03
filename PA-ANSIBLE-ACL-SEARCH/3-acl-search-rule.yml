@@ -1,0 +1,28 @@
+- name: Palo Alto Policy Playbook
+  hosts: palo
+  gather_facts: false
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    palo_provider:
+      ip_address: "{{ ansible_host }}"
+      username: 'admin_rw'
+      password: 'pass_admin_rw'
+
+  tasks:
+
+    - name: Get all security rules
+      paloaltonetworks.panos.panos_security_rule:
+        provider: "{{ palo_provider }}"
+        state: 'gathered'
+        gathered_filter: '*'
+      register: ans
+
+    - debug:
+        msg: '{{ ans }}'
+
+
+

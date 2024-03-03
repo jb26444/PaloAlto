@@ -1,0 +1,24 @@
+- name: Palo Alto Policy Playbook
+  hosts: palo
+  gather_facts: false
+  connection: local
+
+  collections:
+    - paloaltonetworks.panos
+
+  vars:
+    palo_provider:
+      ip_address: "{{ ansible_host }}"
+      username: 'admin_rw'
+      password: 'pass_admin_rw'
+
+  tasks:
+    - name: search for rules containing a specified rule tag
+      panos_match_rule:
+        provider: "{{ palo_provider }}" 
+        source_ip: 'any'
+        destination_ip: 'any'
+        application: 'bgp'
+        protocol: '6'
+        destination_port: '179'
+        tag_name: 'RULE1'
