@@ -18,7 +18,7 @@
     - name: Read firewall rules from CSV
       community.general.read_csv:
         path: "/Users/janblahuta/Documents/GitHub/PA-Automation/PaloAlto/PA-ANSIBLE-ACL-RULES-CSV/ansible.csv"
-        key: name
+        #key: name
       register: firewall_rules
 
     - name: Add security rule to Palo Alto firewall
@@ -31,7 +31,7 @@
         action: "{{ item.action }}"
         log_start: "{{ item.log_start }}"
         log_end: "{{ item.log_end }}"
-      loop: "{{ firewall_rules.results }}"
+      loop: "{{ firewall_rules.result }}"
       register: rule_results
 
     - name: Print rule creation results
