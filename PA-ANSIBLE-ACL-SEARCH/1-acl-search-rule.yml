@@ -21,4 +21,4 @@
         application: 'bgp'
         protocol: '6'
         destination_port: '179'
-        tag_name: 'RULE1'
+        rulebase: ''

@@ -15,10 +15,10 @@
   tasks:
 
     - name: Get all security rules
-      paloaltonetworks.panos.panos_security_rule:
+      panos_security_rule:
         provider: "{{ palo_provider }}"
         state: 'gathered'
-        gathered_filter: '*'
+        gathered_filter: "rule_name == 'BGP'"
       register: ans
 
     - debug:

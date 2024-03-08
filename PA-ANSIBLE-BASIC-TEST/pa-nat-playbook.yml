@@ -12,7 +12,7 @@
     palo_provider:
       ip_address: "{{ ansible_host }}"
       username: 'admin'
-      password: 'Terezka30'
+      password: 'admin'
 
   tasks:
     - name: Create object 'Test-One'
